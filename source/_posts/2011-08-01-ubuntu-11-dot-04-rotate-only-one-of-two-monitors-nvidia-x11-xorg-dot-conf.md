@@ -73,73 +73,75 @@ Solutions
 
 13. Save xorg.conf, log out and log back in. This should give you a working setup. I have experienced some glitches such as slow switching between workspaces, redraw bugs and other minor annoyances, but it works and I'm happy. This is what my xorg.conf file looks like now:
 
-        Section "ServerLayout"
-            Identifier     "Layout0"
-            Screen      0  "Screen0" 0 0
-            Screen      1  "Screen1" 1050 380
-            Option         "Xinerama" "1"
-        EndSection
+``` cfg
+    Section "ServerLayout"
+        Identifier     "Layout0"
+        Screen      0  "Screen0" 0 0
+        Screen      1  "Screen1" 1050 380
+        Option         "Xinerama" "1"
+    EndSection
 
-        Section "Monitor"
-            Identifier     "Monitor0"
-            VendorName     "Unknown"
-            ModelName      "BenQ FP202W"
-            HorizSync       30.0 - 84.0
-            VertRefresh     56.0 - 76.0
-            Option         "DPMS"
-        EndSection
+    Section "Monitor"
+        Identifier     "Monitor0"
+        VendorName     "Unknown"
+        ModelName      "BenQ FP202W"
+        HorizSync       30.0 - 84.0
+        VertRefresh     56.0 - 76.0
+        Option         "DPMS"
+    EndSection
 
-        Section "Monitor"
-            Identifier     "Monitor1"
-            VendorName     "Unknown"
-            ModelName      "LG Electronics W2252"
-            HorizSync       28.0 - 83.0
-            VertRefresh     56.0 - 75.0
-        EndSection
+    Section "Monitor"
+        Identifier     "Monitor1"
+        VendorName     "Unknown"
+        ModelName      "LG Electronics W2252"
+        HorizSync       28.0 - 83.0
+        VertRefresh     56.0 - 75.0
+    EndSection
 
-        Section "Device"
-            Identifier     "Device0"
-            Driver         "nvidia"
-            VendorName     "NVIDIA Corporation"
-            BoardName      "GeForce 9500 GT"
-            Option         "Rotate" "right"
-            BusID          "PCI:2:0:0"
-            Screen          0
-        EndSection
+    Section "Device"
+        Identifier     "Device0"
+        Driver         "nvidia"
+        VendorName     "NVIDIA Corporation"
+        BoardName      "GeForce 9500 GT"
+        Option         "Rotate" "right"
+        BusID          "PCI:2:0:0"
+        Screen          0
+    EndSection
 
-        Section "Device"
-            Identifier     "Device1"
-            Driver         "nvidia"
-            VendorName     "NVIDIA Corporation"
-            BoardName      "GeForce 9500 GT"
-            BusID          "PCI:2:0:0"
-            Screen          1
-        EndSection
+    Section "Device"
+        Identifier     "Device1"
+        Driver         "nvidia"
+        VendorName     "NVIDIA Corporation"
+        BoardName      "GeForce 9500 GT"
+        BusID          "PCI:2:0:0"
+        Screen          1
+    EndSection
 
-        Section "Screen"
+    Section "Screen"
 
-            Identifier     "Screen0"
-            Device         "Device0"
-            Monitor        "Monitor0"
-            DefaultDepth    24
-            Option         "TwinView" "0"
-            Option         "TwinViewXineramaInfoOrder" "DFP-0"
-            Option         "metamodes" "DFP-0: nvidia-auto-select +0+0"
-            SubSection     "Display"
-            Depth       24
-            EndSubSection
-        EndSection
+        Identifier     "Screen0"
+        Device         "Device0"
+        Monitor        "Monitor0"
+        DefaultDepth    24
+        Option         "TwinView" "0"
+        Option         "TwinViewXineramaInfoOrder" "DFP-0"
+        Option         "metamodes" "DFP-0: nvidia-auto-select +0+0"
+        SubSection     "Display"
+        Depth       24
+        EndSubSection
+    EndSection
 
-        Section "Screen"
-            Identifier     "Screen1"
-            Device         "Device1"
-            Monitor        "Monitor1"
-            DefaultDepth    24
-            Option         "TwinView" "0"
-            Option         "metamodes" "DFP-1: nvidia-auto-select +0+0"
-            SubSection     "Display"
-            Depth       24
-            EndSubSection
-        EndSection
+    Section "Screen"
+        Identifier     "Screen1"
+        Device         "Device1"
+        Monitor        "Monitor1"
+        DefaultDepth    24
+        Option         "TwinView" "0"
+        Option         "metamodes" "DFP-1: nvidia-auto-select +0+0"
+        SubSection     "Display"
+        Depth       24
+        EndSubSection
+    EndSection
+```
 
 Please tell me if you know something I could have done better in my setup. Is there some other way to get this thing working with less glitches? Do you know why the error messages come up? Did anyone try 3D with a setup like this?
