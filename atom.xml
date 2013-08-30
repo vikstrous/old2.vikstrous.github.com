@@ -4,7 +4,7 @@
   <title><![CDATA[Viktor's Blog]]></title>
   <link href="http://vikstrous.github.io/atom.xml" rel="self"/>
   <link href="http://vikstrous.github.io/"/>
-  <updated>2013-08-29T21:00:31-04:00</updated>
+  <updated>2013-08-29T22:48:49-04:00</updated>
   <id>http://vikstrous.github.io/</id>
   <author>
     <name><![CDATA[Viktor Stanchev]]></name>
@@ -12,5 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Latent Semantic Analysis in Haskell]]></title>
+    <link href="http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/"/>
+    <updated>2012-04-04T02:41:00-04:00</updated>
+    <id>http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell</id>
+    <content type="html"><![CDATA[<p>Last weekend I decided to learn Haskell with <a href="http://fwilliams.org/">Francis Williams</a>. It was an epic adventure. Last night I implemented LSA &ndash; Latent Semantic Analysis using Haskell.</p>
+
+<p>For those of you who are not enlightened: <a href="http://en.wikipedia.org/wiki/Latent_semantic_analysis">LSA</a> takes a list of documents, extracts terms from them, builds a <a href="http://en.wikipedia.org/wiki/Tfidf">tf-idf</a> matrix, then compresses the matrix to build a lower dimensional approximation, to improve the speed and accuracy of measuring the similarity between documents. Sometimes, this is used in combination with clustering to group the documents into categories.</p>
+
+<p>I want to point anyone interested in this towards the following resources that helped me do this:</p>
+
+<ul>
+<li><a href="http://learnyouahaskell.com/">The best Haskell tutorial on the internet</a></li>
+<li><a href="http://www.puffinwarellc.com/index.php/news-and-articles/articles/33-latent-semantic-analysis-tutorial.html">The best description of LSA I&rsquo;ve seen (python)</a></li>
+<li><a href="http://journal.batard.info/post/2009/04/08/svd-fun-profit">Example of how to do SVD (singular value decomposition) in Haskell</a>:</li>
+</ul>
+
+
+<p>In case anyone wants to do something similar themselves, here is the code I ended up with. Please let me know (email?) if I&rsquo;m doing something stupid and I&rsquo;ll fix this up. I suspect that I am, considering how new I am to Haskell.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='hs'><span class='line'><span class="kr">import</span> <span class="nn">Data.List</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Data.Char</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Numeric.LinearAlgebra</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">titles</span> <span class="ow">=</span> <span class="p">[</span><span class="s">&quot;The Neatest Little Guide to Stock Market Investing&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Investing For Dummies, 4th Edition&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;The Little Book of Common Sense Investing: The Only Way to Guarantee Your Fair Share of Stock Market Returns&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;The Little Book of Value Investing&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Value Investing: From Graham to Buffett and Beyond&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Rich Dad&#39;s Guide to Investing: What the Rich Invest in, That the Poor and the Middle Class Do Not!&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Investing in Real Estate, 5th Edition&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Stock Investing For Dummies&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s">&quot;Rich Dad&#39;s Advisors: The ABC&#39;s of Real Estate Investing: The Secrets of Finding Hidden Profits Most Investors Miss&quot;</span> <span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">stopwords</span> <span class="ow">=</span> <span class="p">[</span><span class="s">&quot;and&quot;</span><span class="p">,</span><span class="s">&quot;edition&quot;</span><span class="p">,</span><span class="s">&quot;for&quot;</span><span class="p">,</span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="s">&quot;little&quot;</span><span class="p">,</span><span class="s">&quot;of&quot;</span><span class="p">,</span><span class="s">&quot;the&quot;</span><span class="p">,</span><span class="s">&quot;to&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">text</span> <span class="ow">=</span> <span class="n">unlines</span> <span class="n">titles</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">docs</span> <span class="ow">::</span> <span class="p">[[</span><span class="kt">String</span><span class="p">]]</span>
+</span><span class='line'><span class="nf">docs</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="n">not</span> <span class="o">.</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="n">stopwords</span><span class="p">)))</span> <span class="o">$</span>      <span class="c1">-- stopwords filter</span>
+</span><span class='line'>        <span class="n">map</span> <span class="n">words</span> <span class="o">$</span>
+</span><span class='line'>          <span class="n">lines</span> <span class="o">$</span>
+</span><span class='line'>            <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">isAlpha</span> <span class="n">x</span> <span class="o">||</span> <span class="n">isSpace</span> <span class="n">x</span><span class="p">)</span> <span class="o">$</span>   <span class="c1">-- discard everything except alpha and space characters</span>
+</span><span class='line'>              <span class="n">map</span> <span class="n">toLower</span> <span class="n">text</span>                        <span class="c1">-- lowercase the input</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">tf</span> <span class="ow">::</span> <span class="p">[([</span><span class="kt">Char</span><span class="p">],</span> <span class="kt">Int</span><span class="p">)]</span>
+</span><span class='line'><span class="nf">tf</span> <span class="ow">=</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kr">_</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">f</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">l</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">length</span> <span class="n">l</span><span class="p">))</span> <span class="o">.</span> <span class="n">group</span> <span class="o">.</span> <span class="n">sort</span> <span class="o">$</span> <span class="n">concat</span> <span class="n">docs</span> <span class="c1">-- remove words that appear only once</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">doc_freq</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="kt">Char</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+</span><span class='line'><span class="nf">doc_freq</span> <span class="n">d</span> <span class="n">t</span> <span class="ow">=</span> <span class="n">length</span> <span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="o">==</span><span class="n">t</span><span class="p">)</span> <span class="p">(</span><span class="n">docs</span> <span class="o">!!</span> <span class="n">d</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">mat</span> <span class="ow">::</span> <span class="kt">Matrix</span> <span class="kt">Double</span>
+</span><span class='line'><span class="nf">mat</span> <span class="ow">=</span> <span class="n">buildMatrix</span> <span class="p">(</span><span class="n">length</span> <span class="n">tf</span><span class="p">)</span> <span class="p">(</span><span class="n">length</span> <span class="n">docs</span><span class="p">)</span> <span class="p">(</span> <span class="nf">\</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span> <span class="ow">-&gt;</span>
+</span><span class='line'>          <span class="kr">let</span> <span class="n">occurances</span> <span class="ow">=</span> <span class="n">fromIntegral</span> <span class="o">$</span> <span class="n">doc_freq</span> <span class="n">doc</span> <span class="o">$</span> <span class="n">fst</span> <span class="o">$</span> <span class="n">tf</span> <span class="o">!!</span> <span class="n">term</span> <span class="c1">-- occurance count</span>
+</span><span class='line'>              <span class="n">docLength</span> <span class="ow">=</span> <span class="n">genericLength</span> <span class="o">$</span> <span class="n">docs</span> <span class="o">!!</span> <span class="n">doc</span>                     <span class="c1">-- words per doc</span>
+</span><span class='line'>              <span class="n">numDocs</span> <span class="ow">=</span> <span class="n">genericLength</span> <span class="n">docs</span>                                <span class="c1">-- number of docs</span>
+</span><span class='line'>              <span class="n">commonness</span> <span class="ow">=</span> <span class="n">fromIntegral</span> <span class="o">$</span> <span class="n">snd</span> <span class="o">$</span> <span class="n">tf</span> <span class="o">!!</span> <span class="n">term</span>                <span class="c1">-- number of docs this word occurs in</span>
+</span><span class='line'>          <span class="kr">in</span> <span class="p">(</span><span class="n">occurances</span> <span class="o">/</span> <span class="n">docLength</span> <span class="o">*</span> <span class="n">log</span> <span class="p">(</span><span class="n">numDocs</span> <span class="o">/</span> <span class="n">commonness</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">compress</span> <span class="n">k</span> <span class="n">m</span> <span class="ow">=</span> <span class="n">u_k</span> <span class="o">&lt;&gt;</span> <span class="n">sigma_k</span> <span class="o">&lt;&gt;</span> <span class="n">v_k</span> <span class="kr">where</span>
+</span><span class='line'>    <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">=</span> <span class="n">fullSVD</span> <span class="n">m</span>                         <span class="c1">-- get SVD</span>
+</span><span class='line'>    <span class="n">sigma_k</span> <span class="ow">=</span> <span class="p">(</span><span class="n">takeColumns</span> <span class="n">k</span> <span class="o">.</span> <span class="n">takeRows</span> <span class="n">k</span><span class="p">)</span> <span class="n">sigma</span>    <span class="c1">-- keep k values of Σ</span>
+</span><span class='line'>    <span class="n">u_k</span> <span class="ow">=</span> <span class="n">takeColumns</span> <span class="n">k</span> <span class="n">u</span>                           <span class="c1">-- keep k columns of U</span>
+</span><span class='line'>    <span class="n">v_k</span> <span class="ow">=</span> <span class="n">takeRows</span> <span class="n">k</span> <span class="o">$</span> <span class="n">trans</span> <span class="n">v</span>                      <span class="c1">-- keep k rows of v</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">reduce_dim</span> <span class="n">k</span> <span class="n">m</span> <span class="ow">=</span> <span class="n">v_k</span> <span class="kr">where</span>
+</span><span class='line'>        <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">=</span> <span class="n">fullSVD</span> <span class="n">m</span>                         <span class="c1">-- mapping of documents to concept space</span>
+</span><span class='line'>        <span class="n">v_k</span> <span class="ow">=</span> <span class="n">takeRows</span> <span class="n">k</span> <span class="o">$</span> <span class="n">trans</span> <span class="n">v</span>                      <span class="c1">-- keep k rows of v</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
 </feed>

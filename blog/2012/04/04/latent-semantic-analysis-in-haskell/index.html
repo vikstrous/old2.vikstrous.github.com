@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Viktor's Blog</title>
+  <title>Latent Semantic Analysis in Haskell - Viktor's Blog</title>
   <meta name="author" content="Viktor Stanchev">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://vikstrous.github.io/">
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,15 +67,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a></h1>
+      <h1 class="entry-title">Latent Semantic Analysis in Haskell</h1>
     
     
       <p class="meta">
@@ -98,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Last weekend I decided to learn Haskell with <a href="http://fwilliams.org/">Francis Williams</a>. It was an epic adventure. Last night I implemented LSA &ndash; Latent Semantic Analysis using Haskell.</p>
+<div class="entry-content"><p>Last weekend I decided to learn Haskell with <a href="http://fwilliams.org/">Francis Williams</a>. It was an epic adventure. Last night I implemented LSA &ndash; Latent Semantic Analysis using Haskell.</p>
 
 <p>For those of you who are not enlightened: <a href="http://en.wikipedia.org/wiki/Latent_semantic_analysis">LSA</a> takes a list of documents, extracts terms from them, builds a <a href="http://en.wikipedia.org/wiki/Tfidf">tf-idf</a> matrix, then compresses the matrix to build a lower dimensional approximation, to improve the speed and accuracy of measuring the similarity between documents. Sometimes, this is used in combination with clustering to group the documents into categories.</p>
 
@@ -214,18 +211,59 @@
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2012-04-04T02:41:00-04:00" pubdate data-updated="true">2012-04-04 02:41:00 -04:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -242,7 +280,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/vikstrous">@vikstrous</a> on GitHub
@@ -275,6 +313,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -289,7 +328,10 @@
       var disqus_shortname = 'vikstrous';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2012/04/04/latent-semantic-analysis-in-haskell/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
