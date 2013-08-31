@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Viktor Stanchev</title>
+  <title>Network Code Module - Viktor Stanchev</title>
   <meta name="author" content="Viktor Stanchev">
 
   
-  <meta name="description" content="Blog Archive 2013 Network Code Module
-Aug 30 2013 2012 Latent Semantic Analysis in Haskell
-Apr 04 2012 2011 Node Knockout: Node RPG
-Sep 01 2011 &hellip;">
+  <meta name="description" content="In the Winter term of 2013, Francis Williams and I worked on an interesting project with one of our professors, Sebastian Fischmeister. The goal was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ Sep 01 2011 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://vikstrous.github.io/blog/archives/">
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2013/08/30/network-code-module/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,111 +69,103 @@ Sep 01 2011 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Network Code Module</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T21:38:00-04:00" pubdate data-updated="true">2013-08-30 21:38:00 -04:00</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>In the Winter term of 2013, <a href="http://fwilliams.org">Francis Williams</a> and I worked on an interesting project with one of our professors, <a href="https://uwaterloo.ca/embedded-software-group/people-profiles/sebastian-fischmeister">Sebastian Fischmeister</a>. The goal was to implement, in software, a language for real time communication schedules that he invented. The <a href="https://uwaterloo.ca/embedded-software-group/sites/ca.embedded-software-group/files/uploads/files/NC-TC_0.pdf">paper</a> is available. Our <a href="https://bitbucket.org/fwilliams/ncm">final result</a> is also available. It was based on a slightly newer version of the language that was already implemented in hardware in an FPGA.</p>
 
-  
-  <h2>2013</h2>
+<p>The project required us to learn how to write a Linux kernel module for RTLinux. We had to send and receive packets in real time. Ultimately, the network code module modified the state of variables that we made accessible to userspace. We chose to use /sys as the interface because it&rsquo;s a very clean way of communicating small amounts of data between kernelspace and userspace. We also tried /dev, but we ran into issues reading from the device. We had a collection of command line tools to convert network code machine instructions between different formats. In addition to the kernel module, we wrote a tool for visualizing network schedules. It was web based and it read input from a file generated using a python script.</p>
 
-<article>
-  
-<h1><a href="/blog/2013/08/30/network-code-module/">Network Code Module</a></h1>
-<time datetime="2013-08-30T21:38:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>30</span> <span class='year'>2013</span></time>
+<p>The list of technologies we had to use to accomplish this is:</p>
 
-
-</article>
-
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a></h1>
-<time datetime="2012-04-04T02:41:00-04:00" pubdate><span class='month'>Apr</span> <span class='day'>04</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a></h1>
-<time datetime="2011-09-01T22:20:00-04:00" pubdate><span class='month'>Sep</span> <span class='day'>01</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a></h1>
-<time datetime="2011-08-01T11:44:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>01</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a></h1>
-<time datetime="2011-06-16T16:21:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>16</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-  
-  <h2>2010</h2>
-
-<article>
-  
-<h1><a href="/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/">Automating a PC to behave as a TV</a></h1>
-<time datetime="2010-12-24T17:15:00-05:00" pubdate><span class='month'>Dec</span> <span class='day'>24</span> <span class='year'>2010</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/11/04/best-spam-slash-advertising-bot-ever/">Best spam/advertising bot ever</a></h1>
-<time datetime="2010-11-04T12:00:00-04:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2010</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/10/14/downloading-torrents-by-text-message/">Downloading torrents by text message</a></h1>
-<time datetime="2010-10-14T02:10:00-04:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2010</span></time>
-
-
-</article>
+<ul>
+<li><strong>ArchLinux</strong> because it&rsquo;s awesome</li>
+<li><strong>VirtualBox</strong> because we blew up the kernel over 9000 times</li>
+<li><strong>Linux kernel source code reading</strong> like a baws</li>
+<li><strong>C</strong> with no chaser</li>
+<li><strong>Make</strong> because Linux kernel :/</li>
+<li><strong>Bash</strong> scripts because why not?</li>
+<li><strong>Python 2 and 3</strong> &ndash; yay!</li>
+<li><strong>Bootstrap, JavaScript, CSS, HTML</strong>, etc. because who doesn&rsquo;t love a pretty UI!</li>
+</ul>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T21:38:00-04:00" pubdate data-updated="true">2013-08-30 21:38:00 -04:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2013/08/30/network-code-module/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2013/08/30/network-code-module/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/" title="Previous Post: Latent Semantic Analysis in Haskell">&laquo; Latent Semantic Analysis in Haskell</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -260,7 +249,10 @@ Sep 01 2011 &hellip;">
       var disqus_shortname = 'vikstrous';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2013/08/30/network-code-module/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2013/08/30/network-code-module/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

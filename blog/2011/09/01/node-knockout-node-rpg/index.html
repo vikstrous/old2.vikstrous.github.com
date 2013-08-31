@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Node Knockout: Node RPG - Viktor Stanchev</title>
+  <meta name="author" content="Viktor Stanchev">
+
+  
+  <meta name="description" content="Node Knockout Last weekend I participated in Node Knockout with Francis Williams. It was really bad timing for both of us and we were able to put in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Viktor Stanchev" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '42271567']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Viktor Stanchev</a></h1>
+  
+    <h2>If you can think - and not make thoughts your aim;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Node Knockout: Node RPG</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T22:20:00-04:00" pubdate data-updated="true">2011-09-01 22:20:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Node Knockout</h2>
+
+<p>Last weekend I participated in <a href="http://nodeknockout.com/">Node Knockout</a> with <a href="http://fwilliams.org">Francis Williams</a>. It was really bad timing for both of us and we were able to put in about 30 man hours into our project, but I&rsquo;m proud of what we accomplished and I want us to continue working on it.</p>
+
+<p>The version that we submitted at the end of the 48 hours contained a number of serious bugs which could have been fixed easily if I was there, but Francis was the only one left to fight some of my code which turned out to be pretty confusing without any documentation. <a href="http://win.no.de">Here</a> it is. Don&rsquo;t look at it.</p>
+
+<p>You can check out the latest version at <a href="http://rpg.no.de">http://rpg.no.de</a> until we get our free hosting taken away. We&rsquo;ll probably work on this project in private for a while and then start inviting people to participate when we have something interesting.</p>
+
+<p>Here are some of my opinions and experiences with the various technologies we used during the competition.</p>
+
+<h2>NKO2</h2>
+
+<p>This was the second Node Knockout. As soon as I heard about the first one, I knew I had to participate in the next one because I was messing with node.js for a while and I wanted to put together something cool. It was really fun because everyone was using open source software and the people running it were on IRC responding the any questions or problems that contestants are having during the whole competition. It was really cool that you could get on IRC and ask everyone else who is participating if they have experiences the same problems as you and how they solved them. Everyone was very helpful.</p>
+
+<h2>NowJS</h2>
+
+<p><a href="http://nowjs.com/">NowJs</a> allows you to use the magical &ldquo;now&rdquo; object to share variables between the client and the server. It also allows you to call a function on the other side of the wire as if it&rsquo;s defined locally. You can even pass callbacks! It&rsquo;s really cool.</p>
+
+<p>We used NowJS extensively for this project. I loved the RMI, but I quickly realized that the shared variables don&rsquo;t have much of a use. We did not have anything that can be directly exposed to the client and it was not possible to filter the values allowed to be set in these magical variables. It was basically awkward and useless, so we stuck with using RMI for setting variables and updating game state. Groups were another feature which we tried really hard to use, but it just seemed awkward because we wanted to manage our user list and &ldquo;room&rdquo; list ourselves. I did not see the value of using NowJS groups over just sending a message to each user in our own group object.</p>
+
+<p>I was really excited about NowJS when I started, but now I think it&rsquo;s just badly thought out and too immature to be useful for anything serious. I think that there are no real world use cases where you would want to set a variable on the server directly from the client. I think that this would give the client an opportunity to DOS the server by setting a really really big set of data into a variable, but I may be wrong.</p>
+
+<p>In the future, I will replace NowJS with <a href="https://github.com/substack/dnode">dnode</a> and see how well that goes.</p>
+
+<h2>Express, Jade, Stylus</h2>
+
+<p><a href="https://github.com/visionmedia">visionmedia(TJ Holowaychuk)</a> has taken node.js and made something that&rsquo;s really, really easy to use and speeds up development time dramatically. It looks like TJ has made all the best tools that exist for building websites in node.js. <a href="https://github.com/visionmedia/express">Express</a> gives us the framework to parse requests and serve pages. <a href="https://github.com/visionmedia/jade">Jade</a> gives us an amazing templating engine which looks much cleaner than any other templating engine including <a href="http://haml-lang.com/">HAML</a>. <a href="https://github.com/LearnBoost/stylus">Stylus</a> allows us to write CSS without all the unnecessary punctuation and with all the features of <a href="http://lesscss.org/">LESS</a>. These are all really cool tools that I will probably always use every time I use node to make a website. I&rsquo;m actually also very interested in <a href="http://calip.so/?utm_source=nodejs&amp;utm_medium=github&amp;utm_campaign=nodejs">Calipso</a> and I am planning to get involved in that.</p>
+
+<h2>Heroku vs. Joyent?</h2>
+
+<p>In the beginning we started off with <a href="http://www.heroku.com/">Heroku</a> as our deploy target. Late at night on the first day we found out that they don&rsquo;t support WebSockets. Someone on IRC told me to try switching to Joyent. It seemed like a lot of work at the time and we delayed it, but on the next day I decided to give it a try and &ndash; lo and behold &ndash; I switched in a fraction of the time it took me to set up Heroku and I got my WebSockets and it was awesome. We stayed with them for the rest of the competition. They give you SSH access and it&rsquo;s really cool. I&rsquo;m not saying there&rsquo;s anything wrong with Heroku &ndash; they have really cool features and it looks like they let you scale your app really well &ndash; I&rsquo;m just saying that if you are doing a hackathon, Joyent will save you time.</p>
+
+<p>At one point, after the end of the 48 hours, our <a href="https://no.de/">node</a> server stopped being accessible from the internet and I went on IRC and asked in #joyent if anyone knows what&rsquo;s going on. Everyone was sleeping, but a bit later one more person popped up reporting the same problem and we determined that we are on the same server. When <a href="http://www.joyent.com/">Joyent</a> woke up the next day, they fixed it and we were back online. I want to thank the Joyent team for being responsive and awesome and fixing problems quickly and you are totally forgiven :)</p>
+
+<h2>Conclusion</h2>
+
+<p>Node Knockout was a great experience and I did not necessarily learn something new, but did realize how much I can accomplish with the skills that I&rsquo;ve obtained over the past few years. I hope to be a part of Node Knockout 3 whenever that happens! Next time we&rsquo;ll be more prepared and have a more complete team. Maybe one day we&rsquo;ll build something worthy of a prize.</p>
+
+<p>Read what Francis has to say about the competition <a href="http://fwilliams.org/projects/rpg-node/">here</a>!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T22:20:00-04:00" pubdate data-updated="true">2011-09-01 22:20:00 -04:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/" title="Previous Post: Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)">&laquo; Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/" title="Next Post: Latent Semantic Analysis in Haskell">Latent Semantic Analysis in Haskell &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/vikstrous">@vikstrous</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'vikstrous',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Viktor Stanchev -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'vikstrous';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

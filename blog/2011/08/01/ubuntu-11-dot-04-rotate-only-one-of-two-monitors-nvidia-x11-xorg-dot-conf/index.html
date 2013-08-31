@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf) - Viktor Stanchev</title>
+  <meta name="author" content="Viktor Stanchev">
+
+  
+  <meta name="description" content="Edit: This may not work any more. Last time I tried it I failed. If anyone knows how to do this let me know. Background: I got a new monitor stand &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Viktor Stanchev" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '42271567']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Viktor Stanchev</a></h1>
+  
+    <h2>If you can think - and not make thoughts your aim;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu 11.04: Rotate Only One of Two Monitors (Nvidia, X11, xorg.conf)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-01T11:44:00-04:00" pubdate data-updated="true">2011-08-01 11:44:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Edit: This may not work any more. Last time I tried it I failed. If anyone knows how to do this let me know.</p>
+
+<h2>Background:</h2>
+
+<p>I got a new monitor stand and I wanted to rotate one of my monitors so I can see more code per page. This works easily in Windows, but apparently no one cares enough about Ubuntu. The information I found from a Google search was not very helpful and it took me over an hour to figure out how to do this, so I hope I can help someone with this post.</p>
+
+<p>Disclaimer: There are probably other ways to do this, but this is just the first thing that worked for me. If you know of a better way, please leave a comment. Note that I haven&rsquo;t tested this with 3D or games or anything fancy.</p>
+
+<p>I have an Nvidia video card with two DVI monitor outputs and I&rsquo;ve set up my desk with a BENQ monitor on the left rotated vertically (right side up) and an LG monitor on the right of it at a height near the middle of the other one.</p>
+
+<h2>Problems</h2>
+
+<p>It turns out that when I rotate the screen with RandR I can only rotate one device. With TwinView, you have one device for both monitors, so they can&rsquo;t be rotated individually. That leads to rotating being almost useless because one screen is always rotated wrong. It seems to me that it&rsquo;s impossible to have the screens rotated differently with just one device(note: I mean xorg.conf &ldquo;device&rdquo;, not one video card) and TwinView.</p>
+
+<p>When I tried to make two screens with two separate Devices, I ran into some problems. The Nvidia X Server Settings tool did not present the option to do this, so I had to edit the xorg.conf file.</p>
+
+<h2>Solutions</h2>
+
+<ol>
+<li><p>Create a copy of /etc/X11/xorg.conf by running</p>
+
+<pre><code> sudo cp /etc/X11/xorg.conf /etc/X11/xorg.conf.bak
+</code></pre>
+
+<p> If anything goes wrong at any time, press CTRL+ALT+F1 (for example, when X11 fails to start) to enter a command line screen. Log in and type this to get your old settings back.</p>
+
+<pre><code> sudo cp /etc/X11/xorg.conf.bak /etc/X11/xorg.conf
+</code></pre>
+
+<p> You will probably just have to restart after this to be able to log in normally again.</p>
+
+<p> Note: You can always press CTRL+ALT+F7 to go back to the graphical desktop.</p></li>
+<li><p>After you have a back up, go into NVIDIA X Server Settings under System > Administration and open the tab <code>X Server Display Configuration</code></p></li>
+<li>Click <code>Configure...</code> and select <code>Separate X screen</code></li>
+<li>Click <code>Enable Xinerama</code></li>
+<li>Select the first monitor and in the X Screen tab make sure it&rsquo;s positioned at <code>Absolute +0+0</code></li>
+<li>Select the second monitor and in the X Screen tab position it at <code>Absolute +(width of your first monitor)+0</code> to place it to the right of the first one.</li>
+<li>Click <code>Save to X Configuration File</code> &ndash; It will complain that the positioning is absolute. Ignore it. It didn&rsquo;t work for me with relative positioning.</li>
+<li>Save the X Configuration File. This will overwrite the file <code>/etc/X11/xorg.conf</code></li>
+<li>Log out and log in again and verify that everything works normally with the two screens beside each other.</li>
+<li><p>Open <code>/etc/X11/xorg.conf</code> to edit it by hand. Nvidia&rsquo;s tool does not support these options. You need to edit it as admin, so the easiest way is to run</p>
+
+<pre><code>sudo gedit /etc/X11/xorg.conf
+</code></pre>
+
+<p>You may see the error</p>
+
+<pre><code>Xlib:  extension "RANDR" missing on display ":0.0".
+</code></pre>
+
+<p>Ignore it. You may also have gotten the error &ldquo;XServer lacks support to dynamic resizing&rdquo; when you logged in. Ignore this too. I didn&rsquo;t see a way to make it go away, but it doesn&rsquo;t break anything as far as I know. (maybe it breaks games?)</p></li>
+<li><p>Find the <code>Device</code> corresponding to the monitor you want to rotate and add this line to its configuration.</p>
+
+<pre><code>Option         "Rotate" "right"
+</code></pre>
+
+<p>or, of course,</p>
+
+<pre><code>Option         "Rotate" "left"
+</code></pre></li>
+<li><p>Now that the screen is rotated, you have to make sure that the screens are positioned beside each other or you won&rsquo;t be able to move your mouse from one to the other. Edit the location of the second <code>Screen</code> in Section &ldquo;ServerLayout&rdquo;. Set the first number (the horizontal offset) to the width of the first monitor and the second number (the vertical offset) can be anything you want. If you want to position the two screens with their bottom edges aligned, try calculating width &ndash; height and using that number. It depends on how your monitors are set up physically so just play with it. You&rsquo;ll have to log out and log back in after every change if you want to see the effect.</p>
+
+<pre><code>Screen      1  "Screen1" 1050 380
+</code></pre></li>
+<li><p>Save xorg.conf, log out and log back in. This should give you a working setup. I have experienced some glitches such as slow switching between workspaces, redraw bugs and other minor annoyances, but it works and I&rsquo;m happy. This is what my xorg.conf file looks like now:</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class='cfg'><span class='line'><span class="err">Section</span> <span class="err">&quot;ServerLayout&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Layout0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>      <span class="err">0</span>  <span class="err">&quot;Screen0&quot;</span> <span class="err">0</span> <span class="err">0</span>
+</span><span class='line'>    <span class="err">Screen</span>      <span class="err">1</span>  <span class="err">&quot;Screen1&quot;</span> <span class="err">1050</span> <span class="err">380</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;Xinerama&quot;</span> <span class="err">&quot;1&quot;</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Monitor&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Monitor0&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;Unknown&quot;</span>
+</span><span class='line'>    <span class="err">ModelName</span>      <span class="err">&quot;BenQ</span> <span class="err">FP202W&quot;</span>
+</span><span class='line'>    <span class="err">HorizSync</span>       <span class="err">30.0</span> <span class="err">-</span> <span class="err">84.0</span>
+</span><span class='line'>    <span class="err">VertRefresh</span>     <span class="err">56.0</span> <span class="err">-</span> <span class="err">76.0</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;DPMS&quot;</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Monitor&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Monitor1&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;Unknown&quot;</span>
+</span><span class='line'>    <span class="err">ModelName</span>      <span class="err">&quot;LG</span> <span class="err">Electronics</span> <span class="err">W2252&quot;</span>
+</span><span class='line'>    <span class="err">HorizSync</span>       <span class="err">28.0</span> <span class="err">-</span> <span class="err">83.0</span>
+</span><span class='line'>    <span class="err">VertRefresh</span>     <span class="err">56.0</span> <span class="err">-</span> <span class="err">75.0</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Device&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Device0&quot;</span>
+</span><span class='line'>    <span class="err">Driver</span>         <span class="err">&quot;nvidia&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;NVIDIA</span> <span class="err">Corporation&quot;</span>
+</span><span class='line'>    <span class="err">BoardName</span>      <span class="err">&quot;GeForce</span> <span class="err">9500</span> <span class="err">GT&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;Rotate&quot;</span> <span class="err">&quot;right&quot;</span>
+</span><span class='line'>    <span class="err">BusID</span>          <span class="err">&quot;PCI:2:0:0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>          <span class="err">0</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Device&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Device1&quot;</span>
+</span><span class='line'>    <span class="err">Driver</span>         <span class="err">&quot;nvidia&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;NVIDIA</span> <span class="err">Corporation&quot;</span>
+</span><span class='line'>    <span class="err">BoardName</span>      <span class="err">&quot;GeForce</span> <span class="err">9500</span> <span class="err">GT&quot;</span>
+</span><span class='line'>    <span class="err">BusID</span>          <span class="err">&quot;PCI:2:0:0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>          <span class="err">1</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Screen&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Screen0&quot;</span>
+</span><span class='line'>    <span class="err">Device</span>         <span class="err">&quot;Device0&quot;</span>
+</span><span class='line'>    <span class="err">Monitor</span>        <span class="err">&quot;Monitor0&quot;</span>
+</span><span class='line'>    <span class="err">DefaultDepth</span>    <span class="err">24</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinView&quot;</span> <span class="err">&quot;0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinViewXineramaInfoOrder&quot;</span> <span class="err">&quot;DFP-0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;metamodes&quot;</span> <span class="err">&quot;DFP-0:</span> <span class="err">nvidia-auto-select</span> <span class="err">+0+0&quot;</span>
+</span><span class='line'>    <span class="err">SubSection</span>     <span class="err">&quot;Display&quot;</span>
+</span><span class='line'>    <span class="err">Depth</span>       <span class="err">24</span>
+</span><span class='line'>    <span class="err">EndSubSection</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Screen&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Screen1&quot;</span>
+</span><span class='line'>    <span class="err">Device</span>         <span class="err">&quot;Device1&quot;</span>
+</span><span class='line'>    <span class="err">Monitor</span>        <span class="err">&quot;Monitor1&quot;</span>
+</span><span class='line'>    <span class="err">DefaultDepth</span>    <span class="err">24</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinView&quot;</span> <span class="err">&quot;0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;metamodes&quot;</span> <span class="err">&quot;DFP-1:</span> <span class="err">nvidia-auto-select</span> <span class="err">+0+0&quot;</span>
+</span><span class='line'>    <span class="err">SubSection</span>     <span class="err">&quot;Display&quot;</span>
+</span><span class='line'>    <span class="err">Depth</span>       <span class="err">24</span>
+</span><span class='line'>    <span class="err">EndSubSection</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please tell me if you know something I could have done better in my setup. Is there some other way to get this thing working with less glitches? Do you know why the error messages come up? Did anyone try 3D with a setup like this?</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-01T11:44:00-04:00" pubdate data-updated="true">2011-08-01 11:44:00 -04:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/06/16/ie7-margin-bug/" title="Previous Post: IE7 Margin Bug">&laquo; IE7 Margin Bug</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/09/01/node-knockout-node-rpg/" title="Next Post: Node Knockout: Node RPG">Node Knockout: Node RPG &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/vikstrous">@vikstrous</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'vikstrous',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Viktor Stanchev -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'vikstrous';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

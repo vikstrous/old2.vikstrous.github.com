@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Automating a PC to behave as a TV - Viktor Stanchev</title>
+  <meta name="author" content="Viktor Stanchev">
+
+  
+  <meta name="description" content="Background My Bulgarian grandparents had nothing to do all day after moving in with us, so my dad bought a subscription to watch Bulgarian TV over &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Viktor Stanchev" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '42271567']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Viktor Stanchev</a></h1>
+  
+    <h2>If you can think - and not make thoughts your aim;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Automating a PC to Behave as a TV</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-24T17:15:00-05:00" pubdate data-updated="true">2010-12-24 17:15:00 -05:00</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Background</h2>
+
+<p>My Bulgarian grandparents had nothing to do all day after moving in with us, so my dad bought a subscription to watch Bulgarian TV over the internet. However, my grandparents are very old and can&rsquo;t use computers at all &ndash; you can&rsquo;t just say &ldquo;oh just double click it&rdquo; because they can&rsquo;t even move the mouse effectively. So I decided to see if I can make it possible to connect the PC to the TV and automate it so that they don&rsquo;t have to do anything other than turn it on.</p>
+
+<h2>First attempt</h2>
+
+<p>The connection was simple &ndash; the TV had a VGA port and an audio input so I just connected it like a monitor and speakers.</p>
+
+<p>Automating the boot sequence was a bit more complicated, still easy. I initially set it up like this:</p>
+
+<ol>
+<li>The PC turns on</li>
+<li>Chrome turns on and opens the page with an embedded video</li>
+<li>Chrome is redirected to the login page</li>
+<li>LastPass automatically logs in</li>
+<li>Chrome is back to the video and loads it</li>
+<li>An autoit script that was run on startup slept 20 seconds from start up and now double clicks the video to make it full screen</li>
+<li>Tada!</li>
+</ol>
+
+
+<p>This wasn&rsquo;t enough for me though. They could only watch one channel, but there were 22 others that the site offered. It would be a waste of money to pay for all of them and not be able to watch them. So I looked into how I can make autoit change channels.</p>
+
+<h2>Second attempt</h2>
+
+<p>I realized that autoit can be used for a lot more than double clicking, so I embarked on a 3 hour journey into the mess and madness that is autoit scripting. It seems similar to Visual Basic, but then again, I&rsquo;ve never used visual basic. Initially I started writing some really barbaric code, but as time went on I got pretty disgusted with my code and made it more compact and robust. Initially I tried making autoit trigger on regular key presses of the buttons 0-9, q-p, a-s. That ended badly because the events triggered by these buttons had to type in the url of the next video. That triggered more events and it got into an infinite loop. Apparently there are ways around it, but I didn&rsquo;t find a reliable one and ended up using ctrl+button rather than just the buttons.</p>
+
+<p>Now I had a way to choose one of the 22 channels by just pressing ctrl + the number or letter! I showed it to my grandparents in that state and my grandfather refused to touch it and my grandmother was confused about how to hold ctrl. So, I needed a mechanism like on the remote to change go to the next or previous channel. I assigned the INSERT and HOME keys to do that because they were beside each other and the labels didn&rsquo;t mean anything for my grandparents. My grandmother seemed to hold the button for too long when she presses it so I had to make sure it doesn&rsquo;t trigger again. I think that worked relatively well. At the end I had a pretty good script that works on a few assumptions:</p>
+
+<ul>
+<li>LastPass is set up to log in automatically</li>
+<li>chrome is used</li>
+<li>the title of the page is &ldquo;www.djTacho.com&rdquo;</li>
+<li>the urls of the channels won&rsquo;t change</li>
+<li>the wireless turns on as soon as the pc turns on</li>
+<li>chrome is the default browser</li>
+<li>chrome is always full screen</li>
+<li>buttons are not pressed too fast one after the other</li>
+</ul>
+
+
+<p>It seems like a long list now that I wrote it out. I&rsquo;m considering making a JavaScript page that uses an iframe to load the video, which will significantly reduce the chances of the whole thing breaking. I&rsquo;ll still need the autoit script to make it full screen though.</p>
+
+<p>This is the final script:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Local $channels[128]
+</span><span class='line'>;These correspond to the ascii codes of their shortcuts
+</span><span class='line'>$channels[48] = "DIEMA";0
+</span><span class='line'>$channels[49] = "";1
+</span><span class='line'>$channels[50] = "NOVA";2
+</span><span class='line'>$channels[51] = "BTV";3
+</span><span class='line'>$channels[52] = "PROBG";4
+</span><span class='line'>$channels[53] = "KANAL3";5
+</span><span class='line'>$channels[54] = "PLANETA";6
+</span><span class='line'>$channels[55] = "DIEMA2";7
+</span><span class='line'>$channels[56] = "DIEMAFAMILY";8
+</span><span class='line'>$channels[57] = "FOXLIFE";9
+</span><span class='line'>$channels[113] = "RINGBG";q
+</span><span class='line'>$channels[119] = "TV7";w
+</span><span class='line'>$channels[101] = "BTVCOMEDY";e
+</span><span class='line'>$channels[114] = "NG";r
+</span><span class='line'>$channels[116] = "EUROSPORT";t
+</span><span class='line'>$channels[121] = "BTVCINEMA";y
+</span><span class='line'>$channels[117] = "TVPLUS";u
+</span><span class='line'>$channels[105] = "NOVASPORT";i
+</span><span class='line'>$channels[111] = "for-kids";o
+</span><span class='line'>$channels[112] = "filmi";p
+</span><span class='line'>$channels[97] = "chalga";a
+</span><span class='line'>$channels[115] = "pop";s
+</span><span class='line'>Local $bound
+</span><span class='line'>Local $url = "http://www.djtacho.com/members/tv.php?id="
+</span><span class='line'>Local $default_channel = '1'
+</span><span class='line'>Local $keys[22] = ['1','2','3','4','5','6','7','8','9','0','q','w','e','r','t','y','u','i','o','p','a','s']
+</span><span class='line'>Local $current = $default_channel
+</span><span class='line'>Local $pause = False
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>;wait for the page to open
+</span><span class='line'>Run(@Comspec & " /c start " & $url & $channels[Asc($default_channel)])
+</span><span class='line'>WinWaitActive("www.djTacho.com - Google Chrome")
+</span><span class='line'>Sleep(3000)
+</span><span class='line'>ToggleFullscreen()
+</span><span class='line'>
+</span><span class='line'>BindHotKeys()
+</span><span class='line'>
+</span><span class='line'>Func NextChannel()
+</span><span class='line'>  ;this stop working at the end anyways so that's good enough
+</span><span class='line'>  $found = False
+</span><span class='line'>  For $key In $keys
+</span><span class='line'>    If $found Then
+</span><span class='line'>      ChangeToChannel($key)
+</span><span class='line'>      $found = False
+</span><span class='line'>      ExitLoop
+</span><span class='line'>    EndIf
+</span><span class='line'>    If $key == $current Then
+</span><span class='line'>      $found = True
+</span><span class='line'>    EndIf
+</span><span class='line'>  Next
+</span><span class='line'>  If $found Then
+</span><span class='line'>    ChangeToChannel($keys[0])
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func PrevChannel()
+</span><span class='line'>  If $current &lt;&gt; $keys[0] Then ;stop at the beginning
+</span><span class='line'>    $last = $keys[0]
+</span><span class='line'>    For $key In $keys
+</span><span class='line'>      If $key == $current Then
+</span><span class='line'>        ChangeToChannel($last)
+</span><span class='line'>        ExitLoop
+</span><span class='line'>      EndIf
+</span><span class='line'>      $last = $key
+</span><span class='line'>    Next
+</span><span class='line'>  Else
+</span><span class='line'>    ChangeToChannel($keys[21])
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ProcessKey()
+</span><span class='line'>  ChangeToChannel(StringTrimLeft(@HotKeyPressed, 1))
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ToggleFullscreen()
+</span><span class='line'>  MouseClick("left", 250, 250)
+</span><span class='line'>  MouseClick("left", 250, 250)
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func GoToURL($url)
+</span><span class='line'>  MouseClick("left", 700, 700)
+</span><span class='line'>  Send("{F6}")
+</span><span class='line'>  Send($url)
+</span><span class='line'>  Send("{ENTER}")
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ChangeToChannel($channel)
+</span><span class='line'>  If Not $pause Then
+</span><span class='line'>    $pause = True
+</span><span class='line'>    $current = $channel
+</span><span class='line'>    ToggleFullscreen()
+</span><span class='line'>    GoToURL($url & $channels[Asc($channel)])
+</span><span class='line'>    Sleep(2000)
+</span><span class='line'>    ToggleFullscreen();on
+</span><span class='line'>    $pause = False
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func BindHotKeys()
+</span><span class='line'>  For $key in $keys 
+</span><span class='line'>    HotKeySet("^" & $key, "ProcessKey")
+</span><span class='line'>  Next
+</span><span class='line'>  HotKeySet("{HOME}", "NextChannel")
+</span><span class='line'>  HotKeySet("{INSERT}", "PrevChannel")
+</span><span class='line'>  HotKeySet("{SPACE}", "ToggleFullscreen")
+</span><span class='line'>  HotKeySet("{PAUSE}", "ToggleBindings")
+</span><span class='line'>  $bound = True
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func UnbindHotKeys()
+</span><span class='line'>  For $key in $keys 
+</span><span class='line'>    HotKeySet("^" & $key)
+</span><span class='line'>  Next
+</span><span class='line'>  HotKeySet("{INSERT}")
+</span><span class='line'>  HotKeySet("{HOME}")
+</span><span class='line'>  HotKeySet("{SPACE}")
+</span><span class='line'>  $bound = False
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ToggleBindings()
+</span><span class='line'>  If $bound Then
+</span><span class='line'>    UnbindHotKeys()
+</span><span class='line'>  Else
+</span><span class='line'>    BindHotKeys()
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>While 1
+</span><span class='line'>  ;
+</span><span class='line'>WEnd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS: I made spacebar toggle fullscreen. That way if something breaks, they can try to fix it by pressing space. Somehow I doubt they&rsquo;ll remember that, but it&rsquo;s worth a try.</p>
+
+<p>PPS: If anyone knows how to get the length of an array, please tell me. Then I wouldn&rsquo;t have to hardcode &ldquo;21&rdquo; on line 68.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-24T17:15:00-05:00" pubdate data-updated="true">2010-12-24 17:15:00 -05:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/11/04/best-spam-slash-advertising-bot-ever/" title="Previous Post: Best spam/advertising bot ever">&laquo; Best spam/advertising bot ever</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/06/16/ie7-margin-bug/" title="Next Post: IE7 Margin Bug">IE7 Margin Bug &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/vikstrous">@vikstrous</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'vikstrous',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Viktor Stanchev -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'vikstrous';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

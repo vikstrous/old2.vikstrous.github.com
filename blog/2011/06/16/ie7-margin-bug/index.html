@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>IE7 Margin Bug - Viktor Stanchev</title>
+  <meta name="author" content="Viktor Stanchev">
+
+  
+  <meta name="description" content="I found a bug in Internet Explorer 9 working in IE7 mode today which has to do with the inheritance of horizontal margins. Update: It turns out that &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://vikstrous.github.io/blog/2011/06/16/ie7-margin-bug/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Viktor Stanchev" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '42271567']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Viktor Stanchev</a></h1>
+  
+    <h2>If you can think - and not make thoughts your aim;</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">IE7 Margin Bug</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T16:21:00-04:00" pubdate data-updated="true">2011-06-16 16:21:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I found a bug in Internet Explorer 9 working in IE7 mode today which has to do with the inheritance of horizontal margins.</p>
+
+<p>Update: It turns out that this is a problem only in quirks mode and in IE7 mode!</p>
+
+<p>The bug is that an input inside a floated div inherits the horizontal margin from the div.</p>
+
+<p>So if we have</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then the margin-left and margin-right on the input are 20px.</p>
+
+<p>I found something similar <a href="http://blog.netscraps.com/bugs/ie6-ie7-margin-inheritance-bug.html">here</a> but it doesn&rsquo;t seem to happen in IE9. This one does. I haven&rsquo;t tested in in other versions of IE, but I did make a test.</p>
+
+<p>Try this test:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'><span class="nc">.clear</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span><span class="k">none</span><span class="p">;</span> <span class="k">clear</span><span class="o">:</span><span class="k">both</span><span class="p">;}</span>
+</span><span class='line'><span class="nc">.blue</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span><span class="m">#00AAFF</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nc">.red</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span><span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Broken in IE9:<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span> <span class="na">class=</span><span class="s">&quot;red&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;clear&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Not broken in IE9:<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span> <span class="na">class=</span><span class="s">&quot;red&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;width:0px&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;clear&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I wonder if it breaks other versions of IE too. One fix is to make sure the input isn&rsquo;t the first element inside the div. There are other ways to get around it too.</p>
+
+<p>P.S. Why is the first blue box extending to include the paragraph after it??? Looks like a topic for another blog post <em>sigh</em>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Viktor Stanchev</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T16:21:00-04:00" pubdate data-updated="true">2011-06-16 16:21:00 -04:00</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vikstrous.github.io/blog/2011/06/16/ie7-margin-bug/" data-via="vikstrous" data-counturl="http://vikstrous.github.io/blog/2011/06/16/ie7-margin-bug/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/" title="Previous Post: Automating a PC to behave as a TV">&laquo; Automating a PC to behave as a TV</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/" title="Next Post: Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/vikstrous">@vikstrous</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'vikstrous',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Viktor Stanchev -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'vikstrous';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vikstrous.github.io/blog/2011/06/16/ie7-margin-bug/';
+        var disqus_url = 'http://vikstrous.github.io/blog/2011/06/16/ie7-margin-bug/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

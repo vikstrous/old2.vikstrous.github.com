@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Viktor's Blog</title>
+  <title>Viktor Stanchev</title>
   <meta name="author" content="Viktor Stanchev">
 
   
-  <meta name="description" content="Last weekend I decided to learn Haskell with Francis Williams. It was an epic adventure. Last night I implemented LSA &ndash; Latent Semantic &hellip;">
+  <meta name="description" content="In the Winter term of 2013, Francis Williams and I worked on an interesting project with one of our professors, Sebastian Fischmeister. The goal was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +24,7 @@
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Viktor's Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Viktor Stanchev" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Viktor's Blog</a></h1>
+  <h1><a href="/">Viktor Stanchev</a></h1>
   
     <h2>If you can think - and not make thoughts your aim;</h2>
   
@@ -61,6 +61,7 @@
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
@@ -69,6 +70,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/30/network-code-module/">Network Code Module</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T21:38:00-04:00" pubdate data-updated="true">2013-08-30 21:38:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the Winter term of 2013, <a href="http://fwilliams.org">Francis Williams</a> and I worked on an interesting project with one of our professors, <a href="https://uwaterloo.ca/embedded-software-group/people-profiles/sebastian-fischmeister">Sebastian Fischmeister</a>. The goal was to implement, in software, a language for real time communication schedules that he invented. The <a href="https://uwaterloo.ca/embedded-software-group/sites/ca.embedded-software-group/files/uploads/files/NC-TC_0.pdf">paper</a> is available. Our <a href="https://bitbucket.org/fwilliams/ncm">final result</a> is also available. It was based on a slightly newer version of the language that was already implemented in hardware in an FPGA.</p>
+
+<p>The project required us to learn how to write a Linux kernel module for RTLinux. We had to send and receive packets in real time. Ultimately, the network code module modified the state of variables that we made accessible to userspace. We chose to use /sys as the interface because it&rsquo;s a very clean way of communicating small amounts of data between kernelspace and userspace. We also tried /dev, but we ran into issues reading from the device. We had a collection of command line tools to convert network code machine instructions between different formats. In addition to the kernel module, we wrote a tool for visualizing network schedules. It was web based and it read input from a file generated using a python script.</p>
+
+<p>The list of technologies we had to use to accomplish this is:</p>
+
+<ul>
+<li><strong>ArchLinux</strong> because it&rsquo;s awesome</li>
+<li><strong>VirtualBox</strong> because we blew up the kernel over 9000 times</li>
+<li><strong>Linux kernel source code reading</strong> like a baws</li>
+<li><strong>C</strong> with no chaser</li>
+<li><strong>Make</strong> because Linux kernel :/</li>
+<li><strong>Bash</strong> scripts because why not?</li>
+<li><strong>Python 2 and 3</strong> &ndash; yay!</li>
+<li><strong>Bootstrap, JavaScript, CSS, HTML</strong>, etc. because who doesn&rsquo;t love a pretty UI!</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -220,6 +273,1026 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T22:20:00-04:00" pubdate data-updated="true">2011-09-01 22:20:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Node Knockout</h2>
+
+<p>Last weekend I participated in <a href="http://nodeknockout.com/">Node Knockout</a> with <a href="http://fwilliams.org">Francis Williams</a>. It was really bad timing for both of us and we were able to put in about 30 man hours into our project, but I&rsquo;m proud of what we accomplished and I want us to continue working on it.</p>
+
+<p>The version that we submitted at the end of the 48 hours contained a number of serious bugs which could have been fixed easily if I was there, but Francis was the only one left to fight some of my code which turned out to be pretty confusing without any documentation. <a href="http://win.no.de">Here</a> it is. Don&rsquo;t look at it.</p>
+
+<p>You can check out the latest version at <a href="http://rpg.no.de">http://rpg.no.de</a> until we get our free hosting taken away. We&rsquo;ll probably work on this project in private for a while and then start inviting people to participate when we have something interesting.</p>
+
+<p>Here are some of my opinions and experiences with the various technologies we used during the competition.</p>
+
+<h2>NKO2</h2>
+
+<p>This was the second Node Knockout. As soon as I heard about the first one, I knew I had to participate in the next one because I was messing with node.js for a while and I wanted to put together something cool. It was really fun because everyone was using open source software and the people running it were on IRC responding the any questions or problems that contestants are having during the whole competition. It was really cool that you could get on IRC and ask everyone else who is participating if they have experiences the same problems as you and how they solved them. Everyone was very helpful.</p>
+
+<h2>NowJS</h2>
+
+<p><a href="http://nowjs.com/">NowJs</a> allows you to use the magical &ldquo;now&rdquo; object to share variables between the client and the server. It also allows you to call a function on the other side of the wire as if it&rsquo;s defined locally. You can even pass callbacks! It&rsquo;s really cool.</p>
+
+<p>We used NowJS extensively for this project. I loved the RMI, but I quickly realized that the shared variables don&rsquo;t have much of a use. We did not have anything that can be directly exposed to the client and it was not possible to filter the values allowed to be set in these magical variables. It was basically awkward and useless, so we stuck with using RMI for setting variables and updating game state. Groups were another feature which we tried really hard to use, but it just seemed awkward because we wanted to manage our user list and &ldquo;room&rdquo; list ourselves. I did not see the value of using NowJS groups over just sending a message to each user in our own group object.</p>
+
+<p>I was really excited about NowJS when I started, but now I think it&rsquo;s just badly thought out and too immature to be useful for anything serious. I think that there are no real world use cases where you would want to set a variable on the server directly from the client. I think that this would give the client an opportunity to DOS the server by setting a really really big set of data into a variable, but I may be wrong.</p>
+
+<p>In the future, I will replace NowJS with <a href="https://github.com/substack/dnode">dnode</a> and see how well that goes.</p>
+
+<h2>Express, Jade, Stylus</h2>
+
+<p><a href="https://github.com/visionmedia">visionmedia(TJ Holowaychuk)</a> has taken node.js and made something that&rsquo;s really, really easy to use and speeds up development time dramatically. It looks like TJ has made all the best tools that exist for building websites in node.js. <a href="https://github.com/visionmedia/express">Express</a> gives us the framework to parse requests and serve pages. <a href="https://github.com/visionmedia/jade">Jade</a> gives us an amazing templating engine which looks much cleaner than any other templating engine including <a href="http://haml-lang.com/">HAML</a>. <a href="https://github.com/LearnBoost/stylus">Stylus</a> allows us to write CSS without all the unnecessary punctuation and with all the features of <a href="http://lesscss.org/">LESS</a>. These are all really cool tools that I will probably always use every time I use node to make a website. I&rsquo;m actually also very interested in <a href="http://calip.so/?utm_source=nodejs&amp;utm_medium=github&amp;utm_campaign=nodejs">Calipso</a> and I am planning to get involved in that.</p>
+
+<h2>Heroku vs. Joyent?</h2>
+
+<p>In the beginning we started off with <a href="http://www.heroku.com/">Heroku</a> as our deploy target. Late at night on the first day we found out that they don&rsquo;t support WebSockets. Someone on IRC told me to try switching to Joyent. It seemed like a lot of work at the time and we delayed it, but on the next day I decided to give it a try and &ndash; lo and behold &ndash; I switched in a fraction of the time it took me to set up Heroku and I got my WebSockets and it was awesome. We stayed with them for the rest of the competition. They give you SSH access and it&rsquo;s really cool. I&rsquo;m not saying there&rsquo;s anything wrong with Heroku &ndash; they have really cool features and it looks like they let you scale your app really well &ndash; I&rsquo;m just saying that if you are doing a hackathon, Joyent will save you time.</p>
+
+<p>At one point, after the end of the 48 hours, our <a href="https://no.de/">node</a> server stopped being accessible from the internet and I went on IRC and asked in #joyent if anyone knows what&rsquo;s going on. Everyone was sleeping, but a bit later one more person popped up reporting the same problem and we determined that we are on the same server. When <a href="http://www.joyent.com/">Joyent</a> woke up the next day, they fixed it and we were back online. I want to thank the Joyent team for being responsive and awesome and fixing problems quickly and you are totally forgiven :)</p>
+
+<h2>Conclusion</h2>
+
+<p>Node Knockout was a great experience and I did not necessarily learn something new, but did realize how much I can accomplish with the skills that I&rsquo;ve obtained over the past few years. I hope to be a part of Node Knockout 3 whenever that happens! Next time we&rsquo;ll be more prepared and have a more complete team. Maybe one day we&rsquo;ll build something worthy of a prize.</p>
+
+<p>Read what Francis has to say about the competition <a href="http://fwilliams.org/projects/rpg-node/">here</a>!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate Only One of Two Monitors (Nvidia, X11, xorg.conf)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-01T11:44:00-04:00" pubdate data-updated="true">2011-08-01 11:44:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Edit: This may not work any more. Last time I tried it I failed. If anyone knows how to do this let me know.</p>
+
+<h2>Background:</h2>
+
+<p>I got a new monitor stand and I wanted to rotate one of my monitors so I can see more code per page. This works easily in Windows, but apparently no one cares enough about Ubuntu. The information I found from a Google search was not very helpful and it took me over an hour to figure out how to do this, so I hope I can help someone with this post.</p>
+
+<p>Disclaimer: There are probably other ways to do this, but this is just the first thing that worked for me. If you know of a better way, please leave a comment. Note that I haven&rsquo;t tested this with 3D or games or anything fancy.</p>
+
+<p>I have an Nvidia video card with two DVI monitor outputs and I&rsquo;ve set up my desk with a BENQ monitor on the left rotated vertically (right side up) and an LG monitor on the right of it at a height near the middle of the other one.</p>
+
+<h2>Problems</h2>
+
+<p>It turns out that when I rotate the screen with RandR I can only rotate one device. With TwinView, you have one device for both monitors, so they can&rsquo;t be rotated individually. That leads to rotating being almost useless because one screen is always rotated wrong. It seems to me that it&rsquo;s impossible to have the screens rotated differently with just one device(note: I mean xorg.conf &ldquo;device&rdquo;, not one video card) and TwinView.</p>
+
+<p>When I tried to make two screens with two separate Devices, I ran into some problems. The Nvidia X Server Settings tool did not present the option to do this, so I had to edit the xorg.conf file.</p>
+
+<h2>Solutions</h2>
+
+<ol>
+<li><p>Create a copy of /etc/X11/xorg.conf by running</p>
+
+<pre><code> sudo cp /etc/X11/xorg.conf /etc/X11/xorg.conf.bak
+</code></pre>
+
+<p> If anything goes wrong at any time, press CTRL+ALT+F1 (for example, when X11 fails to start) to enter a command line screen. Log in and type this to get your old settings back.</p>
+
+<pre><code> sudo cp /etc/X11/xorg.conf.bak /etc/X11/xorg.conf
+</code></pre>
+
+<p> You will probably just have to restart after this to be able to log in normally again.</p>
+
+<p> Note: You can always press CTRL+ALT+F7 to go back to the graphical desktop.</p></li>
+<li><p>After you have a back up, go into NVIDIA X Server Settings under System > Administration and open the tab <code>X Server Display Configuration</code></p></li>
+<li>Click <code>Configure...</code> and select <code>Separate X screen</code></li>
+<li>Click <code>Enable Xinerama</code></li>
+<li>Select the first monitor and in the X Screen tab make sure it&rsquo;s positioned at <code>Absolute +0+0</code></li>
+<li>Select the second monitor and in the X Screen tab position it at <code>Absolute +(width of your first monitor)+0</code> to place it to the right of the first one.</li>
+<li>Click <code>Save to X Configuration File</code> &ndash; It will complain that the positioning is absolute. Ignore it. It didn&rsquo;t work for me with relative positioning.</li>
+<li>Save the X Configuration File. This will overwrite the file <code>/etc/X11/xorg.conf</code></li>
+<li>Log out and log in again and verify that everything works normally with the two screens beside each other.</li>
+<li><p>Open <code>/etc/X11/xorg.conf</code> to edit it by hand. Nvidia&rsquo;s tool does not support these options. You need to edit it as admin, so the easiest way is to run</p>
+
+<pre><code>sudo gedit /etc/X11/xorg.conf
+</code></pre>
+
+<p>You may see the error</p>
+
+<pre><code>Xlib:  extension "RANDR" missing on display ":0.0".
+</code></pre>
+
+<p>Ignore it. You may also have gotten the error &ldquo;XServer lacks support to dynamic resizing&rdquo; when you logged in. Ignore this too. I didn&rsquo;t see a way to make it go away, but it doesn&rsquo;t break anything as far as I know. (maybe it breaks games?)</p></li>
+<li><p>Find the <code>Device</code> corresponding to the monitor you want to rotate and add this line to its configuration.</p>
+
+<pre><code>Option         "Rotate" "right"
+</code></pre>
+
+<p>or, of course,</p>
+
+<pre><code>Option         "Rotate" "left"
+</code></pre></li>
+<li><p>Now that the screen is rotated, you have to make sure that the screens are positioned beside each other or you won&rsquo;t be able to move your mouse from one to the other. Edit the location of the second <code>Screen</code> in Section &ldquo;ServerLayout&rdquo;. Set the first number (the horizontal offset) to the width of the first monitor and the second number (the vertical offset) can be anything you want. If you want to position the two screens with their bottom edges aligned, try calculating width &ndash; height and using that number. It depends on how your monitors are set up physically so just play with it. You&rsquo;ll have to log out and log back in after every change if you want to see the effect.</p>
+
+<pre><code>Screen      1  "Screen1" 1050 380
+</code></pre></li>
+<li><p>Save xorg.conf, log out and log back in. This should give you a working setup. I have experienced some glitches such as slow switching between workspaces, redraw bugs and other minor annoyances, but it works and I&rsquo;m happy. This is what my xorg.conf file looks like now:</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class='cfg'><span class='line'><span class="err">Section</span> <span class="err">&quot;ServerLayout&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Layout0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>      <span class="err">0</span>  <span class="err">&quot;Screen0&quot;</span> <span class="err">0</span> <span class="err">0</span>
+</span><span class='line'>    <span class="err">Screen</span>      <span class="err">1</span>  <span class="err">&quot;Screen1&quot;</span> <span class="err">1050</span> <span class="err">380</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;Xinerama&quot;</span> <span class="err">&quot;1&quot;</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Monitor&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Monitor0&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;Unknown&quot;</span>
+</span><span class='line'>    <span class="err">ModelName</span>      <span class="err">&quot;BenQ</span> <span class="err">FP202W&quot;</span>
+</span><span class='line'>    <span class="err">HorizSync</span>       <span class="err">30.0</span> <span class="err">-</span> <span class="err">84.0</span>
+</span><span class='line'>    <span class="err">VertRefresh</span>     <span class="err">56.0</span> <span class="err">-</span> <span class="err">76.0</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;DPMS&quot;</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Monitor&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Monitor1&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;Unknown&quot;</span>
+</span><span class='line'>    <span class="err">ModelName</span>      <span class="err">&quot;LG</span> <span class="err">Electronics</span> <span class="err">W2252&quot;</span>
+</span><span class='line'>    <span class="err">HorizSync</span>       <span class="err">28.0</span> <span class="err">-</span> <span class="err">83.0</span>
+</span><span class='line'>    <span class="err">VertRefresh</span>     <span class="err">56.0</span> <span class="err">-</span> <span class="err">75.0</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Device&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Device0&quot;</span>
+</span><span class='line'>    <span class="err">Driver</span>         <span class="err">&quot;nvidia&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;NVIDIA</span> <span class="err">Corporation&quot;</span>
+</span><span class='line'>    <span class="err">BoardName</span>      <span class="err">&quot;GeForce</span> <span class="err">9500</span> <span class="err">GT&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;Rotate&quot;</span> <span class="err">&quot;right&quot;</span>
+</span><span class='line'>    <span class="err">BusID</span>          <span class="err">&quot;PCI:2:0:0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>          <span class="err">0</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Device&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Device1&quot;</span>
+</span><span class='line'>    <span class="err">Driver</span>         <span class="err">&quot;nvidia&quot;</span>
+</span><span class='line'>    <span class="err">VendorName</span>     <span class="err">&quot;NVIDIA</span> <span class="err">Corporation&quot;</span>
+</span><span class='line'>    <span class="err">BoardName</span>      <span class="err">&quot;GeForce</span> <span class="err">9500</span> <span class="err">GT&quot;</span>
+</span><span class='line'>    <span class="err">BusID</span>          <span class="err">&quot;PCI:2:0:0&quot;</span>
+</span><span class='line'>    <span class="err">Screen</span>          <span class="err">1</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Screen&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Screen0&quot;</span>
+</span><span class='line'>    <span class="err">Device</span>         <span class="err">&quot;Device0&quot;</span>
+</span><span class='line'>    <span class="err">Monitor</span>        <span class="err">&quot;Monitor0&quot;</span>
+</span><span class='line'>    <span class="err">DefaultDepth</span>    <span class="err">24</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinView&quot;</span> <span class="err">&quot;0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinViewXineramaInfoOrder&quot;</span> <span class="err">&quot;DFP-0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;metamodes&quot;</span> <span class="err">&quot;DFP-0:</span> <span class="err">nvidia-auto-select</span> <span class="err">+0+0&quot;</span>
+</span><span class='line'>    <span class="err">SubSection</span>     <span class="err">&quot;Display&quot;</span>
+</span><span class='line'>    <span class="err">Depth</span>       <span class="err">24</span>
+</span><span class='line'>    <span class="err">EndSubSection</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">Section</span> <span class="err">&quot;Screen&quot;</span>
+</span><span class='line'>    <span class="err">Identifier</span>     <span class="err">&quot;Screen1&quot;</span>
+</span><span class='line'>    <span class="err">Device</span>         <span class="err">&quot;Device1&quot;</span>
+</span><span class='line'>    <span class="err">Monitor</span>        <span class="err">&quot;Monitor1&quot;</span>
+</span><span class='line'>    <span class="err">DefaultDepth</span>    <span class="err">24</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;TwinView&quot;</span> <span class="err">&quot;0&quot;</span>
+</span><span class='line'>    <span class="err">Option</span>         <span class="err">&quot;metamodes&quot;</span> <span class="err">&quot;DFP-1:</span> <span class="err">nvidia-auto-select</span> <span class="err">+0+0&quot;</span>
+</span><span class='line'>    <span class="err">SubSection</span>     <span class="err">&quot;Display&quot;</span>
+</span><span class='line'>    <span class="err">Depth</span>       <span class="err">24</span>
+</span><span class='line'>    <span class="err">EndSubSection</span>
+</span><span class='line'><span class="err">EndSection</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please tell me if you know something I could have done better in my setup. Is there some other way to get this thing working with less glitches? Do you know why the error messages come up? Did anyone try 3D with a setup like this?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T16:21:00-04:00" pubdate data-updated="true">2011-06-16 16:21:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I found a bug in Internet Explorer 9 working in IE7 mode today which has to do with the inheritance of horizontal margins.</p>
+
+<p>Update: It turns out that this is a problem only in quirks mode and in IE7 mode!</p>
+
+<p>The bug is that an input inside a floated div inherits the horizontal margin from the div.</p>
+
+<p>So if we have</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then the margin-left and margin-right on the input are 20px.</p>
+
+<p>I found something similar <a href="http://blog.netscraps.com/bugs/ie6-ie7-margin-inheritance-bug.html">here</a> but it doesn&rsquo;t seem to happen in IE9. This one does. I haven&rsquo;t tested in in other versions of IE, but I did make a test.</p>
+
+<p>Try this test:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'><span class="nc">.clear</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span><span class="k">none</span><span class="p">;</span> <span class="k">clear</span><span class="o">:</span><span class="k">both</span><span class="p">;}</span>
+</span><span class='line'><span class="nc">.blue</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span><span class="m">#00AAFF</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nc">.red</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span><span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Broken in IE9:<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span> <span class="na">class=</span><span class="s">&quot;red&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;clear&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Not broken in IE9:<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left; margin:20px;&quot;</span> <span class="na">class=</span><span class="s">&quot;red&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;width:0px&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;clear&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I wonder if it breaks other versions of IE too. One fix is to make sure the input isn&rsquo;t the first element inside the div. There are other ways to get around it too.</p>
+
+<p>P.S. Why is the first blue box extending to include the paragraph after it??? Looks like a topic for another blog post <em>sigh</em>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/12/24/automating-a-pc-to-behave-as-a-tv/">Automating a PC to Behave as a TV</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-24T17:15:00-05:00" pubdate data-updated="true">2010-12-24 17:15:00 -05:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Background</h2>
+
+<p>My Bulgarian grandparents had nothing to do all day after moving in with us, so my dad bought a subscription to watch Bulgarian TV over the internet. However, my grandparents are very old and can&rsquo;t use computers at all &ndash; you can&rsquo;t just say &ldquo;oh just double click it&rdquo; because they can&rsquo;t even move the mouse effectively. So I decided to see if I can make it possible to connect the PC to the TV and automate it so that they don&rsquo;t have to do anything other than turn it on.</p>
+
+<h2>First attempt</h2>
+
+<p>The connection was simple &ndash; the TV had a VGA port and an audio input so I just connected it like a monitor and speakers.</p>
+
+<p>Automating the boot sequence was a bit more complicated, still easy. I initially set it up like this:</p>
+
+<ol>
+<li>The PC turns on</li>
+<li>Chrome turns on and opens the page with an embedded video</li>
+<li>Chrome is redirected to the login page</li>
+<li>LastPass automatically logs in</li>
+<li>Chrome is back to the video and loads it</li>
+<li>An autoit script that was run on startup slept 20 seconds from start up and now double clicks the video to make it full screen</li>
+<li>Tada!</li>
+</ol>
+
+
+<p>This wasn&rsquo;t enough for me though. They could only watch one channel, but there were 22 others that the site offered. It would be a waste of money to pay for all of them and not be able to watch them. So I looked into how I can make autoit change channels.</p>
+
+<h2>Second attempt</h2>
+
+<p>I realized that autoit can be used for a lot more than double clicking, so I embarked on a 3 hour journey into the mess and madness that is autoit scripting. It seems similar to Visual Basic, but then again, I&rsquo;ve never used visual basic. Initially I started writing some really barbaric code, but as time went on I got pretty disgusted with my code and made it more compact and robust. Initially I tried making autoit trigger on regular key presses of the buttons 0-9, q-p, a-s. That ended badly because the events triggered by these buttons had to type in the url of the next video. That triggered more events and it got into an infinite loop. Apparently there are ways around it, but I didn&rsquo;t find a reliable one and ended up using ctrl+button rather than just the buttons.</p>
+
+<p>Now I had a way to choose one of the 22 channels by just pressing ctrl + the number or letter! I showed it to my grandparents in that state and my grandfather refused to touch it and my grandmother was confused about how to hold ctrl. So, I needed a mechanism like on the remote to change go to the next or previous channel. I assigned the INSERT and HOME keys to do that because they were beside each other and the labels didn&rsquo;t mean anything for my grandparents. My grandmother seemed to hold the button for too long when she presses it so I had to make sure it doesn&rsquo;t trigger again. I think that worked relatively well. At the end I had a pretty good script that works on a few assumptions:</p>
+
+<ul>
+<li>LastPass is set up to log in automatically</li>
+<li>chrome is used</li>
+<li>the title of the page is &ldquo;www.djTacho.com&rdquo;</li>
+<li>the urls of the channels won&rsquo;t change</li>
+<li>the wireless turns on as soon as the pc turns on</li>
+<li>chrome is the default browser</li>
+<li>chrome is always full screen</li>
+<li>buttons are not pressed too fast one after the other</li>
+</ul>
+
+
+<p>It seems like a long list now that I wrote it out. I&rsquo;m considering making a JavaScript page that uses an iframe to load the video, which will significantly reduce the chances of the whole thing breaking. I&rsquo;ll still need the autoit script to make it full screen though.</p>
+
+<p>This is the final script:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Local $channels[128]
+</span><span class='line'>;These correspond to the ascii codes of their shortcuts
+</span><span class='line'>$channels[48] = "DIEMA";0
+</span><span class='line'>$channels[49] = "";1
+</span><span class='line'>$channels[50] = "NOVA";2
+</span><span class='line'>$channels[51] = "BTV";3
+</span><span class='line'>$channels[52] = "PROBG";4
+</span><span class='line'>$channels[53] = "KANAL3";5
+</span><span class='line'>$channels[54] = "PLANETA";6
+</span><span class='line'>$channels[55] = "DIEMA2";7
+</span><span class='line'>$channels[56] = "DIEMAFAMILY";8
+</span><span class='line'>$channels[57] = "FOXLIFE";9
+</span><span class='line'>$channels[113] = "RINGBG";q
+</span><span class='line'>$channels[119] = "TV7";w
+</span><span class='line'>$channels[101] = "BTVCOMEDY";e
+</span><span class='line'>$channels[114] = "NG";r
+</span><span class='line'>$channels[116] = "EUROSPORT";t
+</span><span class='line'>$channels[121] = "BTVCINEMA";y
+</span><span class='line'>$channels[117] = "TVPLUS";u
+</span><span class='line'>$channels[105] = "NOVASPORT";i
+</span><span class='line'>$channels[111] = "for-kids";o
+</span><span class='line'>$channels[112] = "filmi";p
+</span><span class='line'>$channels[97] = "chalga";a
+</span><span class='line'>$channels[115] = "pop";s
+</span><span class='line'>Local $bound
+</span><span class='line'>Local $url = "http://www.djtacho.com/members/tv.php?id="
+</span><span class='line'>Local $default_channel = '1'
+</span><span class='line'>Local $keys[22] = ['1','2','3','4','5','6','7','8','9','0','q','w','e','r','t','y','u','i','o','p','a','s']
+</span><span class='line'>Local $current = $default_channel
+</span><span class='line'>Local $pause = False
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>;wait for the page to open
+</span><span class='line'>Run(@Comspec & " /c start " & $url & $channels[Asc($default_channel)])
+</span><span class='line'>WinWaitActive("www.djTacho.com - Google Chrome")
+</span><span class='line'>Sleep(3000)
+</span><span class='line'>ToggleFullscreen()
+</span><span class='line'>
+</span><span class='line'>BindHotKeys()
+</span><span class='line'>
+</span><span class='line'>Func NextChannel()
+</span><span class='line'>  ;this stop working at the end anyways so that's good enough
+</span><span class='line'>  $found = False
+</span><span class='line'>  For $key In $keys
+</span><span class='line'>    If $found Then
+</span><span class='line'>      ChangeToChannel($key)
+</span><span class='line'>      $found = False
+</span><span class='line'>      ExitLoop
+</span><span class='line'>    EndIf
+</span><span class='line'>    If $key == $current Then
+</span><span class='line'>      $found = True
+</span><span class='line'>    EndIf
+</span><span class='line'>  Next
+</span><span class='line'>  If $found Then
+</span><span class='line'>    ChangeToChannel($keys[0])
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func PrevChannel()
+</span><span class='line'>  If $current &lt;&gt; $keys[0] Then ;stop at the beginning
+</span><span class='line'>    $last = $keys[0]
+</span><span class='line'>    For $key In $keys
+</span><span class='line'>      If $key == $current Then
+</span><span class='line'>        ChangeToChannel($last)
+</span><span class='line'>        ExitLoop
+</span><span class='line'>      EndIf
+</span><span class='line'>      $last = $key
+</span><span class='line'>    Next
+</span><span class='line'>  Else
+</span><span class='line'>    ChangeToChannel($keys[21])
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ProcessKey()
+</span><span class='line'>  ChangeToChannel(StringTrimLeft(@HotKeyPressed, 1))
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ToggleFullscreen()
+</span><span class='line'>  MouseClick("left", 250, 250)
+</span><span class='line'>  MouseClick("left", 250, 250)
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func GoToURL($url)
+</span><span class='line'>  MouseClick("left", 700, 700)
+</span><span class='line'>  Send("{F6}")
+</span><span class='line'>  Send($url)
+</span><span class='line'>  Send("{ENTER}")
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ChangeToChannel($channel)
+</span><span class='line'>  If Not $pause Then
+</span><span class='line'>    $pause = True
+</span><span class='line'>    $current = $channel
+</span><span class='line'>    ToggleFullscreen()
+</span><span class='line'>    GoToURL($url & $channels[Asc($channel)])
+</span><span class='line'>    Sleep(2000)
+</span><span class='line'>    ToggleFullscreen();on
+</span><span class='line'>    $pause = False
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func BindHotKeys()
+</span><span class='line'>  For $key in $keys 
+</span><span class='line'>    HotKeySet("^" & $key, "ProcessKey")
+</span><span class='line'>  Next
+</span><span class='line'>  HotKeySet("{HOME}", "NextChannel")
+</span><span class='line'>  HotKeySet("{INSERT}", "PrevChannel")
+</span><span class='line'>  HotKeySet("{SPACE}", "ToggleFullscreen")
+</span><span class='line'>  HotKeySet("{PAUSE}", "ToggleBindings")
+</span><span class='line'>  $bound = True
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func UnbindHotKeys()
+</span><span class='line'>  For $key in $keys 
+</span><span class='line'>    HotKeySet("^" & $key)
+</span><span class='line'>  Next
+</span><span class='line'>  HotKeySet("{INSERT}")
+</span><span class='line'>  HotKeySet("{HOME}")
+</span><span class='line'>  HotKeySet("{SPACE}")
+</span><span class='line'>  $bound = False
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>Func ToggleBindings()
+</span><span class='line'>  If $bound Then
+</span><span class='line'>    UnbindHotKeys()
+</span><span class='line'>  Else
+</span><span class='line'>    BindHotKeys()
+</span><span class='line'>  EndIf
+</span><span class='line'>EndFunc
+</span><span class='line'>
+</span><span class='line'>While 1
+</span><span class='line'>  ;
+</span><span class='line'>WEnd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS: I made spacebar toggle fullscreen. That way if something breaks, they can try to fix it by pressing space. Somehow I doubt they&rsquo;ll remember that, but it&rsquo;s worth a try.</p>
+
+<p>PPS: If anyone knows how to get the length of an array, please tell me. Then I wouldn&rsquo;t have to hardcode &ldquo;21&rdquo; on line 68.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/11/04/best-spam-slash-advertising-bot-ever/">Best Spam/advertising Bot Ever</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T12:00:00-04:00" pubdate data-updated="true">2010-11-04 12:00:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wouldn&rsquo;t be surprised if someone has already done this, but I came up with this after seeing so many bots trying to troll me unsuccessfully.</p>
+
+<ol>
+<li>Make a chat bot</li>
+<li>Take a whole bunch of chat histories (parse them with regex magic and put them in a db?)</li>
+<li>Use the first line of a random conversation as a conversation starter for your bot</li>
+<li>Every time the user says anything, find the closest match in the conversation histories and use the response given there; if there is nothing even close, use a random line</li>
+<li>Eventually provide the user with a link to your site</li>
+<li>Check if the user clicked on the link and optionally how long he stayed on your site</li>
+<li>Save each successful conversation as a new conversation and discard each failure to persuade the user to click on the link; optionally increase the weight of the lines used in proportion to how long the user stayed on the site</li>
+<li>The better responses will start being used more often</li>
+<li>???</li>
+<li>Profit!</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/10/14/downloading-torrents-by-text-message/">Downloading Torrents by Text Message</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-14T02:10:00-04:00" pubdate data-updated="true">2010-10-14 02:10:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Inspiration</h2>
+
+<p>I was often stranded on a bus or somewhere else without wifi and wished I could start a torrent download before I forget to do it. I needed a way to use my cell phone to do it without having access to the internet. Twitter is the best place I could think of which will provide me with a simple way of transcending from the world of SMS into the world of interwebz. So I wrote a little python script that connects twitter, demonoid.com and a torrent server.</p>
+
+<p>Typical use case</p>
+
+<ol>
+<li>You need a torrent, let&rsquo;s say &ldquo;Paintings of Van Gogh Collection&rdquo;</li>
+<li>You make sure your cell phone is connected to your twitter accounts so you can tweet through text messages</li>
+<li>You text twitter with &ldquo;@torrenter download Paintings of Van Gogh Collection&rdquo;</li>
+<li>The torrent server runs this python script periodically, checking for new messages directed at its twitter account (or any twitter account I guess)</li>
+<li>The torrent server sees a new request, searches demonoid for the most seeded torrent that is relevant and starts downloading it</li>
+</ol>
+
+
+<h2>The setup</h2>
+
+<p>(It&rsquo;s assumed that you have a linux based server you want to control through your cell phone)</p>
+
+<ol>
+<li>Make a twitter account for your torrenter</li>
+<li>Set up your phone to tweet through text messages</li>
+<li>Put the python script below on your torrent server</li>
+<li>Configure the variables inside the script (demonoid username and password, download path and twitter username for the torrenter)</li>
+<li>Set up cron to run it periodically</li>
+<li>Set up your torrent client to load torrent files from the folder you chose to download the torrents to in the config</li>
+</ol>
+
+
+<p>Edit: Demonoid seems to have changed their domain to demonoid.me, so if anyone wants to try this, see if just changing the domain will work. If not I guess you&rsquo;ll have to figure it out yourself.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">urllib2</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">cookielib</span>
+</span><span class='line'><span class="n">urllib2</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPCookieProcessor</span><span class="p">(</span><span class="n">cookielib</span><span class="o">.</span><span class="n">CookieJar</span><span class="p">())))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">demonoid_user</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">demonoid_password</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">save_folder</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">torrenter_twitter</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">torrenter_download</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">q</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</span><span class='line'>    <span class="n">listing</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">&#39;http://www.demonoid.com/files/?&#39;</span><span class="o">+</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">({</span>
+</span><span class='line'>        <span class="s">&#39;query&#39;</span> <span class="p">:</span> <span class="n">q</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;category&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;subcategory&#39;</span> <span class="p">:</span> <span class="s">&#39;All&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;seeded&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;external&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;uid&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;sort&#39;</span><span class="p">:</span><span class="s">&#39;S&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}))</span>
+</span><span class='line'>    <span class="n">torrent</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r&#39;&lt;a href=&quot;([/a-zA-Z0-9]+)&quot;&gt;&lt;img src=&quot;/images/downbg.gif&quot;&#39;</span><span class="p">,</span> <span class="n">listing</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">download</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_folder</span> <span class="o">+</span> <span class="n">q</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">torrent</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">4</span><span class="p">])</span> <span class="o">+</span> <span class="s">&#39;.torrent&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">download</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+</span><span class='line'>        <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">&#39;http://www.demonoid.com/account_handler.php&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">({</span>
+</span><span class='line'>                <span class="s">&#39;nickname&#39;</span> <span class="p">:</span> <span class="n">demonoid_user</span><span class="p">,</span>
+</span><span class='line'>                <span class="s">&#39;password&#39;</span> <span class="p">:</span> <span class="n">demonoid_password</span><span class="p">,</span>
+</span><span class='line'>                <span class="s">&#39;returnpath&#39;</span> <span class="p">:</span> <span class="n">torrent</span>
+</span><span class='line'>                <span class="p">})</span>
+</span><span class='line'>        <span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>    <span class="n">download</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_folder</span><span class="o">+</span><span class="s">&#39;last_id.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">last_id</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="k">except</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">last_id</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">results</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+</span><span class='line'>    <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">&#39;http://search.twitter.com/search.json&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">({</span>
+</span><span class='line'>            <span class="s">&#39;q&#39;</span> <span class="p">:</span> <span class="s">&#39;@&#39;</span><span class="o">+</span><span class="n">torrenter_twitter</span><span class="p">,</span>
+</span><span class='line'>            <span class="s">&#39;rpp&#39;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>            <span class="s">&#39;result_type&#39;</span><span class="p">:</span><span class="s">&#39;recent&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s">&#39;since_id&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">last_id</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">})</span>
+</span><span class='line'>    <span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="p">)[</span><span class="s">&#39;results&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">command</span> <span class="o">=</span> <span class="n">req</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">commands</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s">&#39;download&#39;</span> <span class="p">:</span> <span class="n">torrenter_download</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">commands</span><span class="p">[</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]](</span><span class="n">command</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">except</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_folder</span><span class="o">+</span><span class="s">&#39;last_id.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;id&#39;</span><span class="p">]))</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -233,7 +1306,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/04/04/latent-semantic-analysis-in-haskell/">Latent Semantic Analysis in Haskell</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/01/node-knockout-node-rpg/">Node Knockout: Node RPG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
       </li>
     
   </ul>
