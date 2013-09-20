@@ -57,3 +57,8 @@ Node RPG
 Hackathon: Node Knockout 2
 Description: A massively multiplayer online RPG using Canvas.
 More info: [/blog/2011/09/01/node-knockout-node-rpg/](/blog/2011/09/01/node-knockout-node-rpg/)
+
+Kindle arxiv.org papers
+---
+Hackathon: Facebook
+Description: A Kindle application to search for, re-format and download academic papers from arxiv.org
