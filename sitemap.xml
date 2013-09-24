@@ -24,7 +24,7 @@
         <loc>
             http://vikstrous.github.io/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/
         </loc>
-        <lastmod>2013-08-30T00:26:42-04:00</lastmod>
+        <lastmod>2013-09-23T23:19:35-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/blog/2011/09/01/node-knockout-node-rpg/</loc>
@@ -36,19 +36,27 @@
     </url>
     <url>
         <loc>http://vikstrous.github.io/blog/2013/08/30/network-code-module/</loc>
-        <lastmod>2013-08-30T22:28:27-04:00</lastmod>
+        <lastmod>2013-09-23T23:18:25-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vikstrous.github.io/blog/2013/09/08/simplest-php-hit-counter/</loc>
+        <lastmod>2013-09-23T23:40:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/blog/archives/</loc>
-        <lastmod>2013-08-30T22:28:27-04:00</lastmod>
+        <lastmod>2013-09-23T23:40:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/</loc>
-        <lastmod>2013-08-30T22:28:27-04:00</lastmod>
+        <lastmod>2013-09-23T23:40:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/open-source/</loc>
-        <lastmod>2013-08-30T21:12:33-04:00</lastmod>
+        <lastmod>2013-09-05T17:20:58-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vikstrous.github.io/contact/</loc>
+        <lastmod>2013-09-23T23:30:21-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/projects/little-things.html</loc>
@@ -60,7 +68,7 @@
     </url>
     <url>
         <loc>http://vikstrous.github.io/projects/hackathons.html</loc>
-        <lastmod>2013-08-30T21:38:13-04:00</lastmod>
+        <lastmod>2013-09-23T23:40:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://vikstrous.github.io/projects/caption-search.html</loc>
