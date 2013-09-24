@@ -9,7 +9,7 @@
   <meta name="author" content="Viktor Stanchev">
 
   
-  <meta name="description" content="In the Winter term of 2013, Francis Williams and I worked on an interesting project with one of our professors, Sebastian Fischmeister. The goal was &hellip;">
+  <meta name="description" content="I often find myself wanting to add a little hit counter to a strategic place in a php script without having to deal with setting up any kind of fancy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/simplest-php-hit-counter/">Simplest PHP Hit Counter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T15:14:00-04:00" pubdate data-updated="true">2013-09-08 15:14:00 -04:00</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I often find myself wanting to add a little hit counter to a strategic place in a php script without having to deal with setting up any kind of fancy third party metrics system. So I have written the same few lines of code way too many times. Here they are so they will save me and you time next time we need to do this one silly thing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$count_my_page = ("hitcounter.txt");
+</span><span class='line'>$hits = file($count_my_page);
+</span><span class='line'>$hits[0] ++;
+</span><span class='line'>$fp = fopen($count_my_page , "w");
+</span><span class='line'>fputs($fp , "$hits[0]");
+</span><span class='line'>fclose($fp);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>P.S. I don&rsquo;t know why I used file and fputs instead of just file_get_cntents and file_put_contents. I need to revise this later.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1307,6 +1359,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/08/simplest-php-hit-counter/">Simplest PHP Hit Counter</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/30/network-code-module/">Network Code Module</a>
       </li>
     
@@ -1320,10 +1376,6 @@
     
       <li class="post">
         <a href="/blog/2011/08/01/ubuntu-11-dot-04-rotate-only-one-of-two-monitors-nvidia-x11-xorg-dot-conf/">Ubuntu 11.04: Rotate only one of two monitors (nvidia, X11, xorg.conf)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/06/16/ie7-margin-bug/">IE7 Margin Bug</a>
       </li>
     
   </ul>

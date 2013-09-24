@@ -4,7 +4,7 @@
   <title><![CDATA[Viktor Stanchev]]></title>
   <link href="http://vikstrous.github.io/atom.xml" rel="self"/>
   <link href="http://vikstrous.github.io/"/>
-  <updated>2013-09-23T23:39:43-04:00</updated>
+  <updated>2013-09-23T23:47:46-04:00</updated>
   <id>http://vikstrous.github.io/</id>
   <author>
     <name><![CDATA[Viktor Stanchev]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Simplest PHP Hit Counter]]></title>
+    <link href="http://vikstrous.github.io/blog/2013/09/08/simplest-php-hit-counter/"/>
+    <updated>2013-09-08T15:14:00-04:00</updated>
+    <id>http://vikstrous.github.io/blog/2013/09/08/simplest-php-hit-counter</id>
+    <content type="html"><![CDATA[<p>I often find myself wanting to add a little hit counter to a strategic place in a php script without having to deal with setting up any kind of fancy third party metrics system. So I have written the same few lines of code way too many times. Here they are so they will save me and you time next time we need to do this one silly thing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$count_my_page = ("hitcounter.txt");
+</span><span class='line'>$hits = file($count_my_page);
+</span><span class='line'>$hits[0] ++;
+</span><span class='line'>$fp = fopen($count_my_page , "w");
+</span><span class='line'>fputs($fp , "$hits[0]");
+</span><span class='line'>fclose($fp);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>P.S. I don&rsquo;t know why I used file and fputs instead of just file_get_cntents and file_put_contents. I need to revise this later.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Network Code Module]]></title>
