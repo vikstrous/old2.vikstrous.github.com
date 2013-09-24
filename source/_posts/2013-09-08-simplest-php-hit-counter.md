@@ -8,7 +8,7 @@ categories:
 
 I often find myself wanting to add a little hit counter to a strategic place in a php script without having to deal with setting up any kind of fancy third party metrics system. So I have written the same few lines of code way too many times. Here they are so they will save me and you time next time we need to do this one silly thing.
 
-``` php
+```
 $count_my_page = ("hitcounter.txt");
 $hits = file($count_my_page);
 $hits[0] ++;
